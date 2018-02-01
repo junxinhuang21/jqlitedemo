@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/jquery-1.12.3.js" ></script>
+		
+		<script type="text/javascript">
+			
+//默认存在跨域
+
+/*
+ 域名  端口 协议任意一个不同存在跨域
+ 
+ 
+ 跨域怎么解决：
+ 
+ 	1.后台运行跨域
+ 	2.jsonp请求数据
+ 
+ * */
+			
+			$(function(){
+				
+				
+				$('#button').click(function(){
+//					$.ajax({
+//					   type: "GET",
+//					   url: "json/goods.json",
+//		//			   data: "name=John&location=Boston",
+//					   success: function(msg){
+//					     console.log(msg);
+//					   },
+//					   error:function(err){
+//					   	console.log(err);					   		
+//					   }					   
+//					});
+
+
+
+
+					
+//					$.get('json/goods.json', { name: "John", time: "2pm" }, function(data){
+//						
+//						console.log(data);
+//					})
+//					
+//					
+
+
+//					$.get('json/goods.json', function(data){
+//						
+//						console.log(data);
+//					})
+
+
+
+				
+					
+					$.getJSON('json/goods.json', function(data){
+						
+						console.log(data);
+					})
+
+
+					
+					
+					
+//					$.get('json/test.txt', function(data){
+//						
+//						console.log(data);
+//					});
+
+
+
+
+					
+					
+					
+					
+					
+					
+					
+					
+					
+				})
+			})
+			
+		</script>
+	</head>
+	<body>
+		
+		<button id="button">请求数据</button>
+	</body>
+</html>

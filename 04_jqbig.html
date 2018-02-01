@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<style>
+			
+			/*
+			  background: rgba(200, 222,111, 0.3); */
+			
+		*{
+			margin:0px;
+			padding: 0px;
+		}
+		
+		.product{
+			width: 1000px;
+			border: 1px solid #eee;
+			margin: 100px auto;
+			height: 480px;
+		}
+		/*左侧商品*/
+		.product .product_left{
+			width:380px;
+			height: 380px;
+			
+			float: left;
+			position: relative;
+		}
+		
+		.product .product_left .samll_product{
+			
+			width:360px;
+			height: 360px;
+			margin:10px;
+			
+			position: relative;
+		}
+		.product .product_left .samll_product img{
+			width:360px;
+			height: 360px;
+			
+		}
+		/*移动的区域*/
+		.product .product_left .samll_product .small_area{
+			position: absolute;
+			
+			height: 100px;
+			width:100px;
+			
+			top:100px;
+			left: 100px;
+			background: rgba(200, 222,111, 0.3); 
+			display: none;
+		}
+		
+		
+		/*放大的商品*/
+		.product .product_left .big_product{
+			
+			position: absolute;
+			
+			left: 380px;
+			top:10px;
+			
+			width: 440px;
+			height: 440px;
+			
+			border: 1px solid #000;
+			
+			overflow: hidden;
+			display: none;
+			
+		}
+		
+		.product .product_left .big_product img{
+			width: 800px;
+			height: 800px;
+			position: absolute;
+		}
+		.product .product_right{
+			width:600px;
+			height: 400px;			
+			float: right;
+			
+			
+		}
+		.product .product_right h2{
+			padding: 10px;
+		}
+		</style>
+		
+		<script type="text/javascript" src="js/jquery-1.12.3.js" ></script>
+		<script>
+		$(function(){
+			
+			
+			//var scale=$('#big_img').css('width')/$('#samll_product').css('width');
+			//比例	
+			
+			
+			var $smallProduct=$('#samll_product');
+			var $smallArea=$('#small_area');			
+			var $bigProduct=$('#big_product');			
+			var $bigImg=$('#big_img');			
+			
+			var scale=$bigImg.width()/$smallProduct.width();
+			
+			//设置小区域的宽度高度
+			$smallArea.css({				
+				width:$smallProduct.width()*$bigProduct.width()/$bigImg.width(),
+				height:$smallProduct.height()*$bigProduct.height()/$bigImg.height(),
+			})			
+			//鼠标移入			
+			$smallProduct.mouseover(function(){	
+				$smallArea.show();
+				$bigProduct.show();
+			})	
+			//鼠标移动			
+			$smallProduct.mousemove(function(e){
+				
+				//获取small_area    left  top			
+				
+				var left=e.clientX-$(this).offset().left-$smallArea.width()/2;
+				var top=e.clientY-$(this).offset().top-$smallArea.height()/2;
+				
+				//判断边界
+				
+				if(left<0){
+					left=0;
+				}
+				if(top<0){
+					top=0;
+				}
+				if(left>($smallProduct.width()-$smallArea.width())){
+					
+					left=$smallProduct.width()-$smallArea.width();
+				}
+				if(top>($smallProduct.height()-$smallArea.height())){
+					
+					top=$smallProduct.height()-$smallArea.height();
+				}
+				
+				$smallArea.css({					
+					'left':left,
+					'top':top
+				})
+				
+				$bigImg.css({					
+					'left':-left*scale,
+					'top':-top*scale
+				})
+				
+				
+			})
+			
+			//鼠标离开
+			
+			$smallProduct.mouseleave(function(){				
+				
+				$smallArea.hide();
+				$bigProduct.hide();
+				
+//				$smallProduct.mousemove(null);
+			})	
+			
+			
+		
+		})
+		</script>
+	</head>
+	<body>
+		<div class="product">
+			
+			<div id="product_left" class="product_left">
+				<div id="samll_product" class="samll_product">
+					<img src="images/星际穿越.jpg" />
+					<div id="small_area" class="small_area"></div>
+				</div>				
+				
+				<div id="big_product" class="big_product">
+					<img id="big_img" src="images/星际穿越.jpg" />
+				</div>	
+			</div>
+			
+			<div id="product_right" class="product_right">
+				<h2>这是一个商品的标题</h2>
+				
+			</div>
+			
+			
+			
+			
+		</div>	
+	</body>
+</html>
